@@ -1,13 +1,16 @@
 require('dotenv').config();
 
 let PORT = process.env.PORT;
-let MONGO_URI = process.env.MONGO_URI;
+let MONGODB_URI = process.env.MONGODB_URI;
+
+//--IF WE'RE IN A NODE TESTING ENVIRONMENT THEN
+//--WE'LL USE A DIFFERENT DATABASE
+if (process.env.NODE_ENV === 'test') {
+  MONGODB_URI = process.env.TEST_MONGODB_URI;
+}
+//-----------------------------------------------
 
 module.exports = {
-  MONGO_URI,
+  MONGODB_URI,
   PORT,
 };
-
-/*-- This is where we store the envoriment variables
-instead of in index.js
-They can be accessed as config.MONGO_URI and config.PORT*/
